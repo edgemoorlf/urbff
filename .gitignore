@@ -178,3 +178,5 @@ a.txt
 *.json
 *.csv
 data/
+
+node_modules/
