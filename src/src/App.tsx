@@ -67,7 +67,7 @@ function App() {
     <div className="app">
       <div className="chat-header">
         <h1>🎓 深圳大学生闺蜜聊天室</h1>
-        <p>和你的AI闺蜜小雯聊天吧！她是深大心理学系的22岁学生 ✨</p>
+        <p>和你的AI闺蜜小雯聊天吧！她是深大工商管理系的22岁学生 ✨</p>
       </div>
       
       <div className="chat-container">
@@ -77,7 +77,7 @@ function App() {
               <div className="welcome-content">
                 <span className="welcome-emoji">👋</span>
                 <h3>嗨！我是小雯～</h3>
-                <p>深大心理学系大三学生，超爱民谣和K-pop！周末经常去万象城逛街 🛍️</p>
+                <p>深大工商管理系大三学生，超爱民谣和K-pop！周末经常去万象城逛街 🛍️</p>
                 <p>想聊什么都可以哦～比如学习、追星、深圳的好吃好玩的地方！</p>
               </div>
             </div>
