@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChatMessage } from './components/ChatMessage';
+import { ChatMessage as ChatMessageComponent } from './components/ChatMessage';
 import { ChatInput } from './components/ChatInput';
 import { Message } from './types/chat';
-import { ollamaApi } from './services/ollamaApi';
+import { generateResponse, ChatMessage } from './services/vllmApi';
 import './App.css';
 
 function App() {
@@ -36,7 +36,11 @@ function App() {
     setError(null);
 
     try {
-      const response = await ollamaApi.sendMessage([...messages, userMessage]);
+      const apiMessages: ChatMessage[] = [...messages, userMessage].map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant' as const,
+        content: msg.content
+      }));
+      const response = await generateResponse(apiMessages);
       
       const assistantMessage: Message = {
         id: generateId(),
@@ -84,7 +88,7 @@ function App() {
           )}
           
           {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
+            <ChatMessageComponent key={message.id} message={message} />
           ))}
           
           {isLoading && (
@@ -115,4 +119,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
