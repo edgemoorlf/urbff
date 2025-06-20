@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const VLLM_API_URL = 'http://localhost:8000/v1'; // Default vLLM API endpoint
+const PROXY_BASE_URL = '/api/llm';
 
 const SYSTEM_PROMPT = `你是小雯，22岁深大大三工商管理系学生。你有以下这些特征：
 
@@ -23,7 +23,7 @@ const SYSTEM_PROMPT = `你是小雯，22岁深大大三工商管理系学生。�
 - 你是深圳本地人
 
 重要规则：
-- 回复要超级简短，通常1-2句话，最多3句
+- 回复要超级简短，通常1句话，最多2句
 - 像发微信一样随意，不要太完美
 - 可以有口语、网络用语、偶尔的错字
 - 有时回复简单如"哈哈哈"、"真的吗"、"我也是"
@@ -55,11 +55,11 @@ export const generateResponse = async (messages: ChatMessage[], model: string = 
       ...messages
     ];
 
-    const response = await axios.post(`${VLLM_API_URL}/chat/completions`, {
+    const response = await axios.post(`${PROXY_BASE_URL}/vllm/chat/completions`, {
       model,
       messages: formattedMessages,
       temperature: 0.7,
-      max_tokens: 1000
+      max_tokens: 100
     });
     return response.data.choices[0].message.content;
   } catch (error) {
@@ -70,7 +70,7 @@ export const generateResponse = async (messages: ChatMessage[], model: string = 
 
 export const listAvailableModels = async () => {
   try {
-    const response = await axios.get(`${VLLM_API_URL}/models`);
+    const response = await axios.get(`${PROXY_BASE_URL}/vllm/models`);
     return response.data.data;
   } catch (error) {
     console.error('Error fetching models from vLLM:', error);

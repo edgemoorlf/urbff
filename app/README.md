@@ -29,6 +29,12 @@ ollama serve
 ollama pull gemma3
 ```
 
+### 安装 vllm
+
+```bash
+vllm serve modelscope/models/LLM-Research/gemma-3-27b-it --enable-lora --lora-modules adapter1=tr/saves/Gemma-3-27B-Instruct/lora/train_2025-06-16-14-18-24/ --max-loras 4 --max-lora-rank 16 --served-model-name default --gpu-memory-utilization 0.9
+```
+
 ## 安装和运行
 
 1. **进入项目目录**:

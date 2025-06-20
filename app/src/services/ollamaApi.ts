@@ -1,8 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { Message, ChatResponse, OllamaRequest } from '../types/chat';
 
-const OLLAMA_BASE_URL = 'http://localhost:11434/api';
-const MODEL_NAME = 'gemma3';
+const PROXY_BASE_URL = '/api/llm';
 
 const SYSTEM_PROMPT = `你是小雯，22岁深大大三工商管理系学生。你有以下这些特征：
 
@@ -57,17 +56,11 @@ export class OllamaApi {
       ];
 
       const request: OllamaRequest = {
-        model: MODEL_NAME,
         messages: formattedMessages,
         stream: false
       };
 
-      const response = await axios.post(`${OLLAMA_BASE_URL}/chat`, request, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        timeout: 30000
-      });
+      const response = await axios.post(`${PROXY_BASE_URL}/ollama/chat`, request);
 
       return response.data.message.content;
     } catch (error) {

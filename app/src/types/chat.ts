@@ -16,10 +16,10 @@ export interface ChatResponse {
 }
 
 export interface OllamaRequest {
-  model: string;
+  model?: string;
   messages: Array<{
     role: 'system' | 'user' | 'assistant';
     content: string;
   }>;
   stream: boolean;
-} 
+}
